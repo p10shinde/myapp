@@ -1,0 +1,18 @@
+.allContainer .detailsContainer {
+  display: flex;
+}
+.allContainer button {
+  background: #0B7A75;
+  color: #fff;
+  margin: 1em 1em 1em 0;
+}
+.allContainer img {
+  width: 20%;
+}
+.allContainer h3 {
+  position: relative;
+  left: 160px;
+}
+.allContainer h2 {
+  margin-bottom: .5em;
+}

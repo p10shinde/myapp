@@ -15,6 +15,7 @@
         <ul *ngFor="let d of product.description">
           <li>{{ d }}</li>
         </ul>
+        <h3 class="price">{{product.price | currency:'&#8377;'}}</h3>
       </mat-card-content>
       <mat-card-actions>
         <button class="favIcon" mat-icon-button color="warn">
@@ -25,8 +26,11 @@
           <mat-icon aria-label="wishlist" (click)="wishlistClick(i)" *ngIf="product.wishlist == false">bookmark_border</mat-icon>
           <mat-icon aria-label="wishlist" (click)="wishlistClick(i)" *ngIf="product.wishlist == true">bookmark</mat-icon>
         </button>
-        <button class="cartIcon" mat-icon-button><mat-icon aria-label="shopping cart">shopping_cart</mat-icon></button>
-        <button class="showIcon" mat-icon-button (click)="navigate($event)"><mat-icon aria-label="show">visibility</mat-icon></button>
+        <button class="cartIcon" mat-icon-button>
+          <mat-icon aria-label="shopping cart" (click)="addcartClick(i)" *ngIf="product.cart == true">remove_shopping_cart</mat-icon>
+          <mat-icon aria-label="shopping cart" (click)="addcartClick(i)" *ngIf="product.cart == false">add_shopping_cart</mat-icon>
+        </button>
+        <button class="showIcon" mat-icon-button (click)="navigate(product.id)"><mat-icon aria-label="show">visibility</mat-icon></button>
       </mat-card-actions>
     </mat-card>
   </div>

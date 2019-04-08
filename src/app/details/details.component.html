@@ -1,5 +1,18 @@
-<button mat-raised-button color="accent" (click)="goback()">Back</button>
+<div class="allContainer">
+  <button mat-raised-button (click)="goback()"><i class="material-icons">keyboard_backspace</i></button>
+  <div class="detailsContainer">
+    <div class="leftContainer">
+      <h2>{{product.name}}</h2>
+      <img src="{{product.image}}" alt="">
+      <h3>{{product.price}}</h3>
+    </div>
+    <div class="rightContainer">
+      <ul>
+        <li>test</li>
+        <li>test</li>
+        <li>test</li>
+      </ul>
+    </div>
+  </div>
 
-<h1>
-  PRODUCT DETAILS PAGE
-</h1>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { GeneralService } from '../general.service';
 
 @Component({
   selector: 'app-details',
@@ -8,9 +9,15 @@ import { Router } from '@angular/router';
 })
 export class DetailsComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  id: number;
+  product: Product;
+  constructor(private router: Router, private route: ActivatedRoute, private gService: GeneralService) { }
 
   ngOnInit() {
+    this.gService.updateWishlistCount();
+    this.gService.updateCartCount();
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.product = this.gService.getProductById(this.id);
   }
 
   goback() {

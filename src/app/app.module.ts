@@ -15,7 +15,12 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatMenuModule, MatInputModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule } from '@angular/material';
+import {VgCoreModule} from 'videogular2/core';
+import {VgControlsModule} from 'videogular2/controls';
+import {VgOverlayPlayModule} from 'videogular2/overlay-play';
+import {VgBufferingModule} from 'videogular2/buffering';
+
+import { MatMenuModule, MatInputModule, MatButtonModule, MatCardModule, MatIconModule, MatSnackBarModule } from '@angular/material';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { DetailsComponent } from './details/details.component';
@@ -49,7 +54,13 @@ import { HeaderComponent } from './header/header.component';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatSnackBarModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
