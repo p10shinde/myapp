@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'myapp';
+  active = 'active';
+
+  toggle(e) {
+    console.log(e)
+    this.active = 'active';
+  }
 }

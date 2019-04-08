@@ -1,0 +1,77 @@
+div.allContainer {
+  background: lighten(#000, 90%);
+  width: 100%;
+  div.cardHolder {
+    display: inline-block;
+    padding: 1em;
+    width: 33%;
+    .example-card {
+      max-width: 400px;
+      ::ng-deep .mat-card-header-text {
+        margin: 0 !important;
+      }
+      .example-header-image {
+        background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+        background-size: cover;
+      }
+      .productRate {
+        background: #388e3c;
+        color: #fff;
+        padding: .1em;
+        width: 40px;
+        height: 19px;
+        border-radius: 3px;
+        p {
+          display: inline-block;
+          position: relative;
+          left: 1px;
+        }
+        .starIcon {
+          font-size: 1em;
+          position: relative;
+          top: -16px;
+          left: 23px;
+          // line-height: 1.5
+        }
+      }
+      mat-card-content {
+        ul {
+          color: #24242f;
+          margin-left: 1em;
+          list-style: none;
+        }
+
+        ul li::before {
+          content: "\2022";
+          color: #c1c1c1;
+          font-weight: bold;
+          display: inline-block;
+          width: 1em;
+          margin-left: -1em;
+        }
+        li {
+          margin: .2em;
+        }
+      }
+      mat-card-actions {
+        display: flex;
+        justify-content: space-between;
+        button {
+          margin: 0;
+        }
+        .wishIcon {
+          color: #61CCD5;
+        }
+        .cartIcon {
+          color: #33658A;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
