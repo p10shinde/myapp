@@ -8,4 +8,6 @@ interface Product {
   wishlist: boolean;
   cart: boolean;
   price: number;
+  highlights: string[];
+  reviews: { title: string, description: string, images: string[], username: string, location: string, date: string, rating: number}[];
 }

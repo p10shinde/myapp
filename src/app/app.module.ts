@@ -20,11 +20,13 @@ import {VgControlsModule} from 'videogular2/controls';
 import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 import {VgBufferingModule} from 'videogular2/buffering';
 
-import { MatMenuModule, MatInputModule, MatButtonModule, MatCardModule, MatIconModule, MatSnackBarModule } from '@angular/material';
+import { MatMenuModule, MatInputModule, MatButtonModule, MatCardModule, MatIconModule, MatSnackBarModule,
+          MatTooltipModule} from '@angular/material';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { DetailsComponent } from './details/details.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { HeaderComponent } from './header/header.component';
     PageNotFoundComponent,
     NavigationComponent,
     DetailsComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +59,7 @@ import { HeaderComponent } from './header/header.component';
     MatCardModule,
     MatIconModule,
     MatSnackBarModule,
+    MatTooltipModule,
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,
