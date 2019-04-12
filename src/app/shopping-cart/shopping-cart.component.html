@@ -1,0 +1,51 @@
+<div class="allContainer" *ngIf="!emptyCartSwitch" >
+  <div class="productPanel panel">
+    <h3>MY CART (COUNT)</h3>
+    <hr>
+    <div class="productList">
+      <div class="image">
+        <img src="../../assets/images/sample_product.jpg" alt="">
+      </div>
+      <div class="details">
+        <h3>Product name</h3>
+        <p>product price</p>
+        <button class="removeFromCartButton" mat-raised-button matTooltip="Remove" (click)="removeFromCart()">Remove</button>
+      </div>
+      <div class="delivery">
+        <p>Delivery in 2 days, Wednesday</p>
+      </div>
+    </div>
+    <div class="productList">
+        <div class="image">
+          <img src="../../assets/images/sample_product.jpg" alt="">
+        </div>
+        <div class="details">
+          <h3>Product name</h3>
+          <p>product price</p>
+          <button class="removeFromCartButton" mat-raised-button matTooltip="Remove" (click)="removeFromCart()">Remove</button>
+        </div>
+        <div class="delivery">
+          <p>Delivery in 2 days, Wednesday</p>
+        </div>
+      </div>
+
+  </div>
+  <div class="pricingPanel panel">
+    <h3>PRICE DETAILS</h3>
+    <hr>
+    <div class="priceContainer">
+      <p>Price (2 items)</p>
+      <p class="floatRight">2685</p>
+      <p>Delivery Charges</p>
+      <p class="floatRight">FREE</p>
+      <hr class="dotted">
+      <p>Amount Payble</p>
+      <p class="floatRight">2685</p>
+    </div>
+  </div>
+</div>
+
+<div class="emptyCart" *ngIf="emptyCartSwitch">
+  <img src="../../assets/images/emptyCart.png" alt="">
+  <p>Your shopping cart is empty</p>
+</div>

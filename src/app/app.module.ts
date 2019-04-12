@@ -27,6 +27,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { DetailsComponent } from './details/details.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FooterComponent } from './footer/footer.component';
     NavigationComponent,
     DetailsComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

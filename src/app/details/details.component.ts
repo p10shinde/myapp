@@ -13,6 +13,9 @@ export class DetailsComponent implements OnInit {
   id: number;
   product: Product;
   checkPinActive = true;
+  day: number;
+  days: string;
+  daysList: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   constructor(private router: Router, private route: ActivatedRoute, private gService: GeneralService, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
@@ -20,6 +23,10 @@ export class DetailsComponent implements OnInit {
     this.gService.updateCartCount();
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.product = this.gService.getProductById(this.id);
+    const randomNum = Math.floor(Math.random() * (7 - 1) + 1);
+    this.day = randomNum;
+    this.days = this.daysList[randomNum];
+
   }
 
   goback() {

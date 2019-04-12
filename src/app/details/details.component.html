@@ -23,6 +23,7 @@
           <input type="text" matInput placeholder="Enter Delivery Pincode" #pin>
           <a matSuffix class="checkPin" (click)="checkPin(pin)">Check</a>
         </mat-form-field>
+        <p>Delivery in next {{ day }} {{day ===1 ? 'day' : 'days'}}, {{days}}</p>
       </div>
       <h2 class="sectionTitle">Reviews</h2>
       <div class="sectionContent reviewContent">
