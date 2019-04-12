@@ -10,4 +10,6 @@ interface Product {
   price: number;
   highlights: string[];
   reviews: { title: string, description: string, images: string[], username: string, location: string, date: string, rating: number}[];
+  deliveryCharges: number | string;
+  delivery?: {day: number, days: string};
 }

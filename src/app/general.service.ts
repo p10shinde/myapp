@@ -7,6 +7,8 @@ import { Subject } from 'rxjs';
 export class GeneralService {
   private count = new Subject();
   private cartCount = new Subject();
+  daysList: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  delCharges: (number | string)[] = [20, 'FREE', 100, 150, 'FREE', 50, 'FREE'];
   products: Product[] = [
     {
       id: 1,
@@ -36,7 +38,8 @@ export class GeneralService {
         images: ['reviewBad.jpg', 'reviewBad.jpg'],
         username: 'Pankaj Shinde', location: 'Pune, India', date: 'Today', rating: 1}
 
-      ]
+      ],
+      deliveryCharges: 0
     },
     {
       id: 2,
@@ -65,7 +68,8 @@ export class GeneralService {
         { title: 'Very good phone', description: 'Good Battery life. User interface is amazing',
         images: ['reviewGood.jpg', 'reviewGood.jpg'],
         username: 'ABC XYZ', location: 'kisjdi, India', date: '23 January, 2019', rating: 4}
-      ]
+      ],
+      deliveryCharges: 0
     },
     {
       id: 3,
@@ -94,7 +98,8 @@ export class GeneralService {
         { title: 'Very good headphone', description: 'Sound Quality us amazing',
         images: ['reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg'],
         username: 'WEQ HTY', location: 'PLASIJ, India', date: '1 March, 2019', rating: 4.2}
-      ]
+      ],
+      deliveryCharges: 0
     },
     {
       id: 4,
@@ -126,7 +131,8 @@ export class GeneralService {
         { title: 'Very good headphone', description: 'Sound Quality us amazing',
         images: ['reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg'],
         username: 'WQE RGER', location: 'SDW, U.S.', date: '29 February, 2019', rating: 4.8}
-      ]
+      ],
+      deliveryCharges: 0
     },
     {
       id: 5,
@@ -156,7 +162,8 @@ export class GeneralService {
         { title: 'Very good headphone', description: 'Sound Quality us amazing',
         images: ['reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg', 'reviewGood.jpg'],
         username: 'WQE RGER', location: 'SDW, U.S.', date: '29 February, 2019', rating: 4.8}
-      ]
+      ],
+      deliveryCharges: 0
     }
   ];
 
@@ -168,7 +175,23 @@ export class GeneralService {
     return this.products;
   }
 
+  getCartProducts() {
+    return this.products.filter( dt => {
+      if (dt.cart) {
+        return dt;
+      }
+    });
+  }
+
   getProductById(id: number) {
+    return this.products.filter( dt => {
+      if (id === dt.id ) {
+        return dt;
+      }
+    })[0];
+  }
+
+  getCartProductById(id: number) {
     return this.products.filter( dt => {
       if (id === dt.id ) {
         return dt;
@@ -193,7 +216,6 @@ export class GeneralService {
       }
       return dt.cart;
     });
-    console.log(cCount);
     this.cartCount.next(cCount.length);
   }
 
@@ -203,5 +225,21 @@ export class GeneralService {
 
   getCartUpdatedListener() {
     return this.cartCount.asObservable();
+  }
+
+  getDeliveryDate() {
+    const randomNum = Math.floor(Math.random() * (7 - 0) + 0);
+    const day = randomNum + 1;
+    const days = this.daysList[randomNum];
+    const delCharges = this.delCharges[randomNum];
+    return { day, days, delCharges };
+  }
+
+  removeFromCart(id) {
+    this.products.forEach( dt => {
+      if (dt.id === id) {
+        dt.cart = false;
+      }
+    });
   }
 }
