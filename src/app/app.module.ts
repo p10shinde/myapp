@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 
@@ -21,13 +22,14 @@ import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 import {VgBufferingModule} from 'videogular2/buffering';
 
 import { MatMenuModule, MatInputModule, MatButtonModule, MatCardModule, MatIconModule, MatSnackBarModule,
-          MatTooltipModule} from '@angular/material';
+          MatTooltipModule, MatGridListModule} from '@angular/material';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { DetailsComponent } from './details/details.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     DetailsComponent,
     HeaderComponent,
     FooterComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -62,10 +65,12 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     MatIconModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatGridListModule,
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,
-    VgBufferingModule
+    VgBufferingModule,
+    HttpClientModule
 
   ],
   providers: [],

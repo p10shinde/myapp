@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeneralService {
-  private count = new Subject();
+  debugger;
+  private wishlistCount = new BehaviorSubject<number>(0);
   private cartCount = new Subject();
   daysList: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   delCharges: (number | string)[] = [20, 'FREE', 100, 150, 'FREE', 50, 'FREE'];
@@ -199,14 +200,34 @@ export class GeneralService {
     })[0];
   }
 
+  addToFavourite(id: number) {
+    this.products.map(dt => {
+      if (dt.id === id) {
+        dt.favourite = !dt.favourite;
+      }
+    });
+  }
+
+  addToWishList(id: number) {
+    this.products.map(dt => {
+      if (dt.id === id) {
+        dt.wishlist = !dt.wishlist;
+      }
+    });
+
+
+  }
+
   updateWishlistCount(id?: number) {
-    const tCount = this.products.filter( dt => {
+    const total =  this.products.filter( dt => {
       if ( dt.id === id) {
         dt.wishlist = dt.wishlist;
       }
       return dt.wishlist;
     });
-    this.count.next(tCount.length);
+
+    console.log('updating')
+    this.wishlistCount.next(total.length);
   }
 
   updateCartCount(id?: number) {
@@ -219,9 +240,11 @@ export class GeneralService {
     this.cartCount.next(cCount.length);
   }
 
-  getCountUpdatedListener() {
-    return this.count.asObservable();
+getWishListCountUpdatedListener() {
+    return this.wishlistCount.asObservable();
   }
+
+
 
   getCartUpdatedListener() {
     return this.cartCount.asObservable();
@@ -242,4 +265,5 @@ export class GeneralService {
       }
     });
   }
+
 }

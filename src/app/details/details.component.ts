@@ -41,4 +41,12 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+  addToCart() {
+
+  }
+
+  buyNow() {
+
+  }
+
 }

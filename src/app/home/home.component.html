@@ -19,12 +19,12 @@
       </mat-card-content>
       <mat-card-actions>
         <button class="favIcon" mat-icon-button color="warn">
-          <mat-icon aria-label="favourite" (click)="favouriteClick(i)" *ngIf="product.favourite == false">favorite_border</mat-icon>
-          <mat-icon aria-label="favourite" (click)="favouriteClick(i)" *ngIf="product.favourite == true">favorite</mat-icon>
+          <mat-icon aria-label="favourite" (click)="favouriteClick(product.id)" *ngIf="product.favourite == false">favorite_border</mat-icon>
+          <mat-icon aria-label="favourite" (click)="favouriteClick(product.id)" *ngIf="product.favourite == true">favorite</mat-icon>
         </button>
         <button class="wishIcon" mat-icon-button>
-          <mat-icon aria-label="wishlist" (click)="wishlistClick(i)" *ngIf="product.wishlist == false">bookmark_border</mat-icon>
-          <mat-icon aria-label="wishlist" (click)="wishlistClick(i)" *ngIf="product.wishlist == true">bookmark</mat-icon>
+          <mat-icon aria-label="wishlist" (click)="wishlistClick(product.id)" *ngIf="product.wishlist == false">bookmark_border</mat-icon>
+          <mat-icon aria-label="wishlist" (click)="wishlistClick(product.id)" *ngIf="product.wishlist == true">bookmark</mat-icon>
         </button>
         <button class="cartIcon" mat-icon-button>
           <mat-icon aria-label="shopping cart" (click)="addcartClick(i)" *ngIf="product.cart == true">remove_shopping_cart</mat-icon>

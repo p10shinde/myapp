@@ -4,22 +4,29 @@ import { GeneralService } from '../general.service';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.less']
+  styleUrls: ['./navigation.component.less'],
+  providers: [GeneralService]
 })
 export class NavigationComponent implements OnInit {
-  wishlistCount = 0;
+  wishlistCount = -1;
   cartlistCount = 0;
 
   constructor(private gService: GeneralService) { }
 
   ngOnInit() {
-    this.gService.getCountUpdatedListener().subscribe(val => {
-      this.wishlistCount = Number(val);
-    });
+    this.gService.getWishListCountUpdatedListener().subscribe(
+     (val) => {
+          console.log('Next: ' + val);
+      });
 
     this.gService.getCartUpdatedListener().subscribe(val => {
       this.cartlistCount = Number(val);
     });
+
+
+
+
+    console.log('subscribed')
 
   }
 

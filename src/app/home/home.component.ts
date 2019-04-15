@@ -6,14 +6,15 @@ import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.less']
+  styleUrls: ['./home.component.less'],
+  providers: [GeneralService]
 })
 export class HomeComponent implements OnInit {
 
   products: Product[] = [];
 
   favourite = false;
-  constructor(private router: Router, private gService: GeneralService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private gService: GeneralService, private snackBar: MatSnackBar ) { }
   myArray(n: number): any[] {
     return Array(n);
   }
@@ -25,16 +26,19 @@ export class HomeComponent implements OnInit {
   }
 
   navigate(id: number) {
-    this.router.navigateByUrl('/details/' + id);
+    this.router.navigate(['/details' , id]);
   }
 
-  favouriteClick(index: number) {
-    this.products[index].favourite = !this.products[index].favourite;
+  favouriteClick(id: number) {
+    this.gService.addToFavourite(id);
+    // this.products[index].favourite = !this.products[index].favourite;
   }
 
-  wishlistClick(index: number) {
-    this.products[index].wishlist = !this.products[index].wishlist;
-    this.gService.updateWishlistCount(this.products[index].id);
+  wishlistClick(id: number) {
+    this.gService.addToWishList(id);
+
+    // this.products[index].wishlist = !this.products[index].wishlist;
+    // this.gService.updateWishlistCount(this.products[index].id);
   }
 
   addcartClick(index: number) {
