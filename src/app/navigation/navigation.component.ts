@@ -8,9 +8,9 @@ import { Router} from '@angular/router';
   styleUrls: ['./navigation.component.less']
 })
 export class NavigationComponent implements OnInit {
+  isLoggedIn = false;
   wishlistCount = 0;
   cartlistCount = 0;
-  isLoggedIn = false;
 
   constructor(private gService: GeneralService, private router: Router) { }
 
@@ -23,15 +23,14 @@ export class NavigationComponent implements OnInit {
       this.cartlistCount = val;
     });
 
-    this.gService.isLoggedInListener().subscribe(val => {
-      this.isLoggedIn = val;
-      if (this.isLoggedIn) {
-        this.router.navigate(['/home']);
-      } else {
-        this.router.navigate(['/login']);
-      }
+    this.gService.userStatusSource().subscribe( user => {
+        this.isLoggedIn = user.status;
     })
 
+  }
+
+  logout() {
+    this.gService.logout();
   }
 
 }

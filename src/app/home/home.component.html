@@ -1,7 +1,7 @@
 <div class="allContainer">
   <div class="cardHolder" *ngFor="let product of products; let i = index;">
     <mat-card class="example-card">
-      <mat-card-header>
+      <mat-card-header (click)="navigate(product.id)">
         <!-- <div mat-card-avatar class="example-header-image"></div> -->
         <mat-card-title>{{product.name}}</mat-card-title>
         <mat-card-subtitle>

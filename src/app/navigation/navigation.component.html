@@ -5,7 +5,7 @@
 
   <button class="cmbtn contactus" mat-button [routerLink]="['/contactus']" routerLinkActive="active">Contact Us</button>
   <button class="cmbtn login" *ngIf="!isLoggedIn" mat-button [routerLink]="['/login']" routerLinkActive="active">Login/Sign Up</button>
-  <button class="cmbtn logout" *ngIf="isLoggedIn" mat-button >Logout</button>
+  <button class="cmbtn logout" *ngIf="isLoggedIn" mat-button (click)="logout()">Logout</button>
   <button class="wishIcon" mat-mini-fab>
     <mat-icon aria-label="wishlist">bookmark</mat-icon>
     <span>{{wishlistCount}}</span>

@@ -10,6 +10,9 @@ div.allContainer div.cardHolder {
 div.allContainer div.cardHolder .example-card {
   max-width: 200px;
 }
+div.allContainer div.cardHolder .example-card mat-card-header {
+  cursor: pointer;
+}
 div.allContainer div.cardHolder .example-card ::ng-deep .mat-card-header-text {
   margin: 0 !important;
 }

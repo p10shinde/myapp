@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { LocalStorage } from '@ngx-pwa/local-storage';
+import * as _ from 'underscore';
+import { Router } from '@angular/router';
+import { JSONSchema } from '@ngx-pwa/local-storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeneralService {
-  isLoggedIn = false;
   private count = new Subject<number>();
-  private isLoggedInFlag = new Subject<boolean>();
+  userFound: User;
   private cartCount = new Subject<number>();
+  private userStatusSubject = new BehaviorSubject({status : false, user : this.userFound});
   daysList: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   delCharges: (number | string)[] = [20, 'FREE', 100, 150, 'FREE', 50, 'FREE'];
   products: Product[] = [
@@ -179,34 +182,64 @@ export class GeneralService {
     }
   ];
 
-  constructor(private localStorage: LocalStorage) { }
+  constructor(private localStorage: LocalStorage, private router: Router) { }
+
+  login(user: User) {
+    this.userFound = _.findWhere(this.users, user);
+    if (_.isUndefined(this.userFound)) {
+      this.updateUserStatus(false);
+      return false;
+    } else {
+      this.updateUserStatus(true, user);
+      return true;
+    }
+  }
+
+  updateUserStatus(status: boolean, user?: User) {
+    if (status) {
+      this.localStorage.setItem('user', user).subscribe( us => {
+        this.userStatusSubject.next({status: true, user});
+        this.router.navigate(['home']);
+      });
+    } else {
+      this.localStorage.removeItem('user').subscribe( () => { });
+      this.userStatusSubject.next({status: true, user});
+    }
+  }
+
+
+
+  userStatusSource() {
+    return this.userStatusSubject.asObservable();
+  }
+
 
   userLoggedIn() {
-    this.localStorage.getItem('user').subscribe( user => {
-      if (user === null) {
-        this.isLoggedIn = false;
-        this.isLoggedInFlag.next(false);
-      } else {
-        this.isLoggedIn = true;
-        this.isLoggedInFlag.next(true);
-      }
-    });
-    return this.isLoggedIn;
+
+
+
   }
 
-  isLoggedInListener() {
-    return this.isLoggedInFlag.asObservable();
-  }
 
   validateUser(user: User) {
-    this.isLoggedIn = false;
-    this.users.map( u => {
-      if (u.username === user.username && u.password === user.password) {
-        this.isLoggedIn = true;
-      }
+
+  }
+
+  logout() {
+    const schema : JSONSchema = {
+      type: 'object',
+      properties: {
+        username: { type: 'string' },
+        password: { type: 'string' }
+      },
+      required: ['username', 'password']
+    };
+    this.localStorage.getItem<User>('user', { schema }).subscribe( user => {
+      console.log(user)
+      this.localStorage.removeItem('user').subscribe( () => {
+        this.userStatusSubject.next({status: true, user});
+      });
     });
-    this.isLoggedInFlag.next(this.isLoggedIn);
-    return this.isLoggedIn;
   }
 
   getProducts() {

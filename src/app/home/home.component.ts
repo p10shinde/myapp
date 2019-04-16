@@ -11,6 +11,7 @@ import {MatSnackBar} from '@angular/material';
 export class HomeComponent implements OnInit {
 
   products: Product[] = [];
+  isLoggedIn = false;
 
   favourite = false;
   constructor(private router: Router, private gService: GeneralService, private snackBar: MatSnackBar) { }
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
     this.products = this.gService.getProducts();
     this.gService.updateWishlistCount();
     this.gService.updateCartCount();
+
   }
 
   navigate(id: number) {

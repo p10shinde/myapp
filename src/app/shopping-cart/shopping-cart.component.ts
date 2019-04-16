@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralService } from '../general.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -7,6 +8,7 @@ import { GeneralService } from '../general.service';
   styleUrls: ['./shopping-cart.component.less']
 })
 export class ShoppingCartComponent implements OnInit {
+  isLoggedIn = false;
   emptyCart: boolean;
   cartProducts: Product[];
   invoice: Invoice = {price: 0, totalDelCharges: 0, amountPayable: 0};
@@ -16,7 +18,7 @@ export class ShoppingCartComponent implements OnInit {
   totalDeliveryCharges = 0;
   deliveryCharges;
   daysList: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  constructor(private gService: GeneralService) { }
+  constructor(private gService: GeneralService, private router: Router) { }
 
   ngOnInit() {
     this.emptyCart = false;
@@ -27,6 +29,13 @@ export class ShoppingCartComponent implements OnInit {
     this.getDeliveryDate();
 
     this.updateInvoice();
+
+    this.gService.userStatusSource().subscribe(user => {
+      if (user.status === false) {
+        this.router.navigate(['login']);
+      }
+    });
+
   }
 
   getDeliveryDate() {

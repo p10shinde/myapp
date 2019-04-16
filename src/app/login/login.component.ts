@@ -8,7 +8,6 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-  isLoggedIn = false;
   signupActive = false;
   username: FormControl;
   password: FormControl;
@@ -16,25 +15,16 @@ export class LoginComponent implements OnInit {
   constructor(private gService: GeneralService) { }
 
   ngOnInit() {
-    this.isLoggedIn = this.gService.userLoggedIn();
+    this.gService.updateWishlistCount();
+    this.gService.updateCartCount();
     this.username = new FormControl('');
     this.password = new FormControl('');
     this.password2 = new FormControl('');
   }
 
   login() {
-    const tUser: User = {username : this.username.value.trim(),
-                    password : this.password.value.trim() }
-    if (this.username.valid && tUser.username !== '') {
-      if (this.password.valid && tUser.password !== '') {
-        this.gService.validateUser(tUser)
-      } else {
-        return;
-      }
-    } else {
-      return;
-    }
-    return;
+    const user = {username: this.username.value, password: this.password.value};
+    this.gService.login(user);
   }
 
   signUp() {
