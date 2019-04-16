@@ -199,13 +199,14 @@ export class GeneralService {
   }
 
   validateUser(user: User) {
-    let found = false;
+    this.isLoggedIn = false;
     this.users.map( u => {
       if (u.username === user.username && u.password === user.password) {
-        found = true;
+        this.isLoggedIn = true;
       }
     });
-    return found;
+    this.isLoggedInFlag.next(this.isLoggedIn);
+    return this.isLoggedIn;
   }
 
   getProducts() {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralService } from '../general.service';
 import { FormControl } from '@angular/forms';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +27,7 @@ export class LoginComponent implements OnInit {
                     password : this.password.value.trim() }
     if (this.username.valid && tUser.username !== '') {
       if (this.password.valid && tUser.password !== '') {
-        console.log(this.gService.validateUser(tUser));
+        this.gService.validateUser(tUser)
       } else {
         return;
       }

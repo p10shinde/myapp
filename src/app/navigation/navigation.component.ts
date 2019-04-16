@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralService } from '../general.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -11,7 +12,7 @@ export class NavigationComponent implements OnInit {
   cartlistCount = 0;
   isLoggedIn = false;
 
-  constructor(private gService: GeneralService) { }
+  constructor(private gService: GeneralService, private router: Router) { }
 
   ngOnInit() {
     this.gService.getWishListCountUpdatedListener().subscribe(val => {
@@ -24,6 +25,11 @@ export class NavigationComponent implements OnInit {
 
     this.gService.isLoggedInListener().subscribe(val => {
       this.isLoggedIn = val;
+      if (this.isLoggedIn) {
+        this.router.navigate(['/home']);
+      } else {
+        this.router.navigate(['/login']);
+      }
     })
 
   }
