@@ -6,7 +6,6 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DetailsComponent } from './details/details.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { TestComponent } from './test/test.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
@@ -14,10 +13,9 @@ const routes: Routes = [
   { path: 'aboutus', component: AboutusComponent },
   { path: 'contactus', component: ContactusComponent },
   { path: 'shoppingcart', component: ShoppingCartComponent },
-  { path: 'test', component: TestComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'details/:id', component: DetailsComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'details/:id', component: DetailsComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

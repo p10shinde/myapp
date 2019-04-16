@@ -6,14 +6,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TestService {
 
-  constructor(private httpClient: HttpClient) { }
+   constructor(private httpClient: HttpClient) { }
 
 
-  getData() {
+   getData() {
     return this.httpClient.get('https://jsonplaceholder.typicode.com/users');
   }
 
-  getUsers() {
+   getUsers() {
     return this.httpClient.get('https://api.github.com/users?since=135');
   }
 }

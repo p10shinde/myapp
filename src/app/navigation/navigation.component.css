@@ -10,9 +10,13 @@
 }
 .nav-bar button.home,
 .nav-bar button.aboutus,
-.nav-bar button.contactus {
-  width: 25%;
+.nav-bar button.contactus,
+.nav-bar button.login {
+  width: 18%;
   background: #0c837e;
+}
+.nav-bar button.login {
+  padding: 0 5px;
 }
 .nav-bar button.cartIcon,
 .nav-bar button.wishIcon {

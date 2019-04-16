@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeneralService {
-  debugger;
-  private wishlistCount = new BehaviorSubject<number>(0);
-  private cartCount = new Subject();
+  isLoggedIn = false;
+  private count = new Subject<number>();
+  private isLoggedInFlag = new Subject<boolean>();
+  private cartCount = new Subject<number>();
   daysList: string[] = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   delCharges: (number | string)[] = [20, 'FREE', 100, 150, 'FREE', 50, 'FREE'];
   products: Product[] = [
@@ -168,9 +170,43 @@ export class GeneralService {
     }
   ];
 
+  users: User[] = [
+    {
+      id: 1, username: 'pankaj', password: '123'
+    },
+    {
+      id: 2, username: 'shinde', password: 'shinde123'
+    }
+  ];
 
+  constructor(private localStorage: LocalStorage) { }
 
-  constructor() { }
+  userLoggedIn() {
+    this.localStorage.getItem('user').subscribe( user => {
+      if (user === null) {
+        this.isLoggedIn = false;
+        this.isLoggedInFlag.next(false);
+      } else {
+        this.isLoggedIn = true;
+        this.isLoggedInFlag.next(true);
+      }
+    });
+    return this.isLoggedIn;
+  }
+
+  isLoggedInListener() {
+    return this.isLoggedInFlag.asObservable();
+  }
+
+  validateUser(user: User) {
+    let found = false;
+    this.users.map( u => {
+      if (u.username === user.username && u.password === user.password) {
+        found = true;
+      }
+    });
+    return found;
+  }
 
   getProducts() {
     return this.products;
@@ -200,34 +236,14 @@ export class GeneralService {
     })[0];
   }
 
-  addToFavourite(id: number) {
-    this.products.map(dt => {
-      if (dt.id === id) {
-        dt.favourite = !dt.favourite;
-      }
-    });
-  }
-
-  addToWishList(id: number) {
-    this.products.map(dt => {
-      if (dt.id === id) {
-        dt.wishlist = !dt.wishlist;
-      }
-    });
-
-
-  }
-
   updateWishlistCount(id?: number) {
-    const total =  this.products.filter( dt => {
+    const tCount = this.products.filter( dt => {
       if ( dt.id === id) {
         dt.wishlist = dt.wishlist;
       }
       return dt.wishlist;
     });
-
-    console.log('updating')
-    this.wishlistCount.next(total.length);
+    this.count.next(tCount.length);
   }
 
   updateCartCount(id?: number) {
@@ -240,11 +256,9 @@ export class GeneralService {
     this.cartCount.next(cCount.length);
   }
 
-getWishListCountUpdatedListener() {
-    return this.wishlistCount.asObservable();
+  getWishListCountUpdatedListener() {
+    return this.count.asObservable();
   }
-
-
 
   getCartUpdatedListener() {
     return this.cartCount.asObservable();
@@ -266,4 +280,20 @@ getWishListCountUpdatedListener() {
     });
   }
 
+  addToWishList(id: number) {
+    this.products.map(dt => {
+      if (dt.id === id) {
+        dt.wishlist = !dt.wishlist;
+      }
+    });
+    this.updateWishlistCount(id)
+   }
+
+   addToFavourite(id: number) {
+    this.products.map(dt => {
+      if (dt.id === id) {
+        dt.favourite = !dt.favourite;
+      }
+    });
+  }
 }

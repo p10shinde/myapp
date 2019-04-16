@@ -57,6 +57,7 @@ div.allContainer div.cardHolder .example-card mat-card-content .price {
 div.allContainer div.cardHolder .example-card mat-card-actions {
   display: flex;
   justify-content: space-between;
+  margin: 0 auto;
 }
 div.allContainer div.cardHolder .example-card mat-card-actions button {
   margin: 0;
