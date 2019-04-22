@@ -1,5 +1,9 @@
 <div class="allContainer">
   <button mat-raised-button matTooltip="Go Back" (click)="goback()"><i class="material-icons">keyboard_backspace</i></button>
+  <h2>{{product.name}}</h2>
+  <div class="productRate">
+    <p>{{ product.rating | number: '1.1'}}</p> <i class="material-icons starIcon">star_rate</i>
+  </div>
   <vg-player>
     <video [vgMedia]="media" #media id="singleVideo" preload="auto" autoplay>
         <source src="../../assets/videos/test.mp4" type="video/mp4">
@@ -7,10 +11,7 @@
   </vg-player>
   <div class="detailsContainer">
     <div class="leftContainer">
-      <h2>{{product.name}}</h2>
-      <div class="productRate">
-        <p>{{ product.rating | number: '1.1'}}</p> <i class="material-icons starIcon">star_rate</i>
-      </div>
+
       <img src="{{product.image}}" alt="">
       <h3>{{product.price | currency:'&#8377;'}}</h3>
       <button mat-raised-button class="addtocart" (click)="addToCart()" matTooltip="Add To Cart"><i class="material-icons">shopping_cart</i></button>

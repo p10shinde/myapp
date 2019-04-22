@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Subject, BehaviorSubject } from 'rxjs';
-import { LocalStorage } from '@ngx-pwa/local-storage';
+import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
 import * as _ from 'underscore';
 import { Router } from '@angular/router';
-import { JSONSchema } from '@ngx-pwa/local-storage';
 
 @Injectable({
   providedIn: 'root'
@@ -175,14 +174,14 @@ export class GeneralService {
 
   users: User[] = [
     {
-      id: 1, username: 'pankaj', password: '123'
+      id: 1, username: 'pankaj', password: '123', image: 'u1'
     },
     {
-      id: 2, username: 'shinde', password: 'shinde123'
+      id: 2, username: 'shinde', password: 'shinde123', image: 'u2'
     }
   ];
 
-  constructor(private localStorage: LocalStorage, private router: Router) { }
+  constructor(@Inject(LOCAL_STORAGE) private storage: WebStorageService, private router: Router) { }
 
   login(user: User) {
     this.userFound = _.findWhere(this.users, user);
@@ -190,21 +189,36 @@ export class GeneralService {
       this.updateUserStatus(false);
       return false;
     } else {
-      this.updateUserStatus(true, user);
+      this.updateUserStatus(true, this.userFound);
       return true;
     }
   }
 
   updateUserStatus(status: boolean, user?: User) {
     if (status) {
-      this.localStorage.setItem('user', user).subscribe( us => {
-        this.userStatusSubject.next({status: true, user});
-        this.router.navigate(['home']);
-      });
+      this.storage.set('user', user);
+      this.userStatusSubject.next({status: true, user});
+      this.router.navigate(['home']);
     } else {
-      this.localStorage.removeItem('user').subscribe( () => { });
+      this.storage.remove('user');
       this.userStatusSubject.next({status: true, user});
     }
+  }
+
+  userLoggedIn() {
+    const user = this.storage.get('user');
+    if (user) {
+      this.userStatusSubject.next({status: true, user});
+      if (this.router.url === '/login') {
+        this.router.navigate(['home']);
+      }
+    } else {
+      if (this.router.url === '/shoppingcart') {
+        this.router.navigate(['login']);
+      }
+    }
+
+    console.log(this.router.url);
   }
 
 
@@ -214,32 +228,19 @@ export class GeneralService {
   }
 
 
-  userLoggedIn() {
-
-
-
-  }
-
-
   validateUser(user: User) {
 
   }
 
   logout() {
-    const schema : JSONSchema = {
-      type: 'object',
-      properties: {
-        username: { type: 'string' },
-        password: { type: 'string' }
-      },
-      required: ['username', 'password']
-    };
-    this.localStorage.getItem<User>('user', { schema }).subscribe( user => {
-      console.log(user)
-      this.localStorage.removeItem('user').subscribe( () => {
-        this.userStatusSubject.next({status: true, user});
-      });
-    });
+    const user = this.storage.get('user');
+    this.storage.remove('user');
+    // this.localStorage.getItem('user').subscribe( user => {
+    //   console.log(user)
+      // this.localStorage.removeItem('user').subscribe( () => {
+    this.userStatusSubject.next({status: false, user});
+      // });
+    // });
   }
 
   getProducts() {

@@ -17,13 +17,16 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.gService.updateWishlistCount();
     this.gService.updateCartCount();
+    this.gService.userLoggedIn();
     this.username = new FormControl('');
     this.password = new FormControl('');
     this.password2 = new FormControl('');
+
+
   }
 
   login() {
-    const user = {username: this.username.value, password: this.password.value};
+    const user = {username: this.username.value, password: this.password.value };
     this.gService.login(user);
   }
 

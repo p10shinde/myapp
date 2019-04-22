@@ -6,12 +6,13 @@
   flex-wrap: wrap;
   color: #fff;
   padding: .5em;
-  width: 50%;
+  width: 60%;
   float: right;
   overflow: auto;
+  overflow: hidden;
 
   button.cmbtn {
-    width:18%;
+    width:16%;
     background:lighten(#0B7A75, 2%);
   }
 
@@ -21,6 +22,19 @@
 
   button.cartIcon, button.wishIcon {
     background: #0B7A75;
+  }
+
+  ::ng-deep button.userIcon {
+    span {
+      padding: 0 !important;
+    }
+
+    p {
+      position: absolute;
+      bottom: -14px;
+      left: -11px;
+      color: #000000;
+    }
   }
 
   ::ng-deep .mat-mini-fab .mat-button-wrapper {
@@ -47,7 +61,12 @@
   .active {
     background: #1f938e;
   }
+
+  img {
+    width: 100%;
+  }
 }
+
 
 
 // .bar {

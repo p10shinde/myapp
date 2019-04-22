@@ -11,6 +11,8 @@ export class NavigationComponent implements OnInit {
   isLoggedIn = false;
   wishlistCount = 0;
   cartlistCount = 0;
+  userName;
+  userImage;
 
   constructor(private gService: GeneralService, private router: Router) { }
 
@@ -24,8 +26,28 @@ export class NavigationComponent implements OnInit {
     });
 
     this.gService.userStatusSource().subscribe( user => {
+      if (user.status) {
+        if (user.user) {
+          this.userName = user.user.username;
+          if (user.user.image) {
+            this.userImage = '../../assets/images/' + user.user.image + '.jpg';
+          } else {
+            this.userImage = '../../assets/images/unknown-user.png';
+          }
+          this.isLoggedIn = user.status;
+        } else {
+          this.userImage = '../../assets/images/unknown-user.png';
+          this.userName = '';
+        }
+      } else {
+        this.userImage = '../../assets/images/unknown-user.png';
+        this.userName = '';
         this.isLoggedIn = user.status;
-    })
+      }
+    });
+
+    this.gService.userLoggedIn();
+
 
   }
 

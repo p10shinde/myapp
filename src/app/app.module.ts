@@ -20,6 +20,8 @@ import {VgControlsModule} from 'videogular2/controls';
 import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 import {VgBufferingModule} from 'videogular2/buffering';
 
+import { StorageServiceModule} from 'angular-webstorage-service';
+
 import { MatMenuModule, MatInputModule, MatButtonModule, MatCardModule, MatIconModule, MatSnackBarModule,
           MatTooltipModule, MatGridListModule} from '@angular/material';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -71,7 +73,8 @@ import { TestComponent } from './test/test.component';
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-    HttpClientModule
+    HttpClientModule,
+    StorageServiceModule
 
   ],
   providers: [],

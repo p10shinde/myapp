@@ -4,15 +4,13 @@
   flex-wrap: wrap;
   color: #fff;
   padding: .5em;
-  width: 50%;
+  width: 60%;
   float: right;
   overflow: auto;
+  overflow: hidden;
 }
-.nav-bar button.home,
-.nav-bar button.aboutus,
-.nav-bar button.contactus,
-.nav-bar button.login {
-  width: 18%;
+.nav-bar button.cmbtn {
+  width: 16%;
   background: #0c837e;
 }
 .nav-bar button.login {
@@ -21,6 +19,15 @@
 .nav-bar button.cartIcon,
 .nav-bar button.wishIcon {
   background: #0B7A75;
+}
+.nav-bar ::ng-deep button.userIcon span {
+  padding: 0 !important;
+}
+.nav-bar ::ng-deep button.userIcon p {
+  position: absolute;
+  bottom: -14px;
+  left: -11px;
+  color: #000000;
 }
 .nav-bar ::ng-deep .mat-mini-fab .mat-button-wrapper {
   padding: 8px 7px;
@@ -41,4 +48,7 @@
 }
 .nav-bar .active {
   background: #1f938e;
+}
+.nav-bar img {
+  width: 100%;
 }
