@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
     this.gService.updateWishlistCount();
     this.gService.updateCartCount();
     this.gService.userLoggedIn();
-    this.username = new FormControl('');
-    this.password = new FormControl('');
+    this.username = new FormControl('pankaj');
+    this.password = new FormControl('123');
     this.password2 = new FormControl('');
 
 
